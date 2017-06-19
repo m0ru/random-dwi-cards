@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Design With Intent - Random Generator</title>
+    <style type="text/css">
+        body {
+            background-color: #0f0f0f;
+        }
+        img {
+            background-color: #ffffff;
+        }
+        #mountpoint {
+            /* to stop the reload-glitching / FOUC */
+            height: 415px;
+            width: 574px;
+        }
+
+
+        /* The button theme is an adapted version of Petia Koleva's css @ http://cssdeck.com/labs/beautiful-flat-buttons */
+        /* #Concrete Flat Button
+        ==================================================*/
+        .concrete-flat-button {
+            position: relative;
+            vertical-align: top;
+            /*width: 100%;*/
+            height: 3em;
+            padding: 0;
+            padding-left: 2em;
+            padding-right: 2em;
+            font-size: 1.3em;
+            color:white;
+            text-align: center;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+            background: #4E4E51;
+            border: 0;
+            border-bottom: 2px solid #6B7171;
+            cursor: pointer;
+            -webkit-box-shadow: inset 0 -2px #95a5a6;
+            box-shadow: inset 0 -2px #6B7171;
+        }
+        .concrete-flat-button:active {
+            top: 1px;
+            outline: none;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
+        .fullscreen {
+            /*width: 100%;*/
+            width: 100vh;
+            min-width: 100vh;
+            height: 100vh;
+            min-height: 100vh;
+        }
+        .vertical-center-flex {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .flex-item {
+          flex: 1 1 center;
+          margin-top: 1em;
+          margin-bottom: 1em;
+        }
+        .vcenter {
+            transform: translateY(-50%);
+            position: absolute;
+            top: 50%;
+        }
+        .hcenter {
+            transform: translateX(-50%);
+            position: absolute;
+            left: 50%;
+        }
+        .fineprint {
+            /*margin-top: 8em;*/
+            width: 30em;
+            color: #444444;
+            font-size: 0.85em;
+        }
+        .fineprint > a {
+            color: #2E2EC6;
+        }
+        .fineprint > a:visited { color: #4B1C8D; }
+    </style>
+</head>
+<body>
+    <div class="vertical-center-flex fullscreen hcenter">
+        <div id="mountpoint" class="flex-item"></div>
+        <button onclick="nextCard();"
+                class="flex-item concrete-flat-button">
+            Next
+        </button>
+        <p class="fineprint">This is a random generator that pulls from the deck of <a href="http://designwithintent.co.uk/">Design with Intent</a> cards designed by Dan Lockton with David Harrison and Neville A. Stanton</p>
+    </div>
+
+
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", nextCard);
+
+        function randomInt(min, max) {
+            //generates int in the range of [min, max+1)
+            var diff = max + 1 - min
+            return Math.floor(Math.random() * diff) + min
+        }
+
+        function nextCard() {
+            var idx = randomInt(1,101)
+            document.getElementById("mountpoint").innerHTML =
+                "<img src='cards/" + idx + ".svg'" +
+                //" class='center-orig vcenter hcenter" +
+                " alt='Design Intent Card - " + idx + "' />"
+        }
+    </script>
+</body>
+</html>
